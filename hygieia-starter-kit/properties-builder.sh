@@ -26,7 +26,8 @@ dbport=27017
 server.contextPath=/api
 server.port=8080
 
-#API encryption key. Optional. See https://hygieia.github.io/Hygieia/setup.html#encryption-for-private-repos	
+#API encryption key. Optional. See https://hygieia.github.io/Hygieia/setup.html#encryption-for-private-repos
+#Randomly generated key	
 key=DfvBg+AOGol5fOofjMdPYtpYGQ1rH4km
 
 #Authentication Settings
@@ -50,6 +51,7 @@ github.rateLimitThreshold=100
 github.readTimeout=60000
 github.connectTimeout=30000
 
+#Randomly generated key	
 github.key=DfvBg+AOGol5fOofjMdPYtpYGQ1rH4km
 
 # Sonar Properties #

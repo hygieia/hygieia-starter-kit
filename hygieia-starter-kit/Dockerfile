@@ -1,4 +1,4 @@
-FROM hygieia-starter-base:2.0
+FROM hygieia-starter-base:latest
 
 EXPOSE 8080
 EXPOSE 80
@@ -7,13 +7,11 @@ ENV JAVA_HOME /usr/lib/jvm/java-openjdk
 ENV PROP_FILE /hygieia/application.properties
 
 RUN mkdir -p /hygieia/api/logs; \
-mkdir -p /hygieia/mongo/; \
 mkdir -p /hygieia/ui/; \
 mkdir -p /hygieia/collectors/logs; \
 mkdir -p /usr/src/app
 
 
-COPY /mongo/* /hygieia/mongo/
 COPY /api/* /hygieia/api/
 COPY /system/* /etc/systemd/system/
 COPY /collectors/* /hygieia/collectors/
