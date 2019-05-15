@@ -1,0 +1,13 @@
+[Unit]
+Description=GithubCollectorService
+
+[Service]
+ExecStart=/usr/bin/java -Dlogging.config=file:/hygieia/collectors/logback_github.xml -jar /hygieia/collectors/github-scm-collector.jar --spring.config.name=github --spring.config.location=/hygieia/application.properties
+Restart=always
+User=root
+Group=root
+respawn=true
+WorkingDirectory=/hygieia/collectors
+
+[Install]
+WantedBy=multi-user.target

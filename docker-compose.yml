@@ -1,0 +1,19 @@
+
+version: '3'
+services:
+  hygieia-starter:
+    image: hygieia-starter:1.2
+    ports:
+      - "80:80"
+    environment: 
+      - GITHUB_HOST=
+      - GITHUB_CRON=0/60 * * * * *
+      - JENKINS_CRON=0/60 * * * * *
+      - JENKINS_SERVER_0=
+    privileged: true
+#    volumes:
+#      - '<path_to_local_storage>:/var/lib/mongo'
+
+
+
+  

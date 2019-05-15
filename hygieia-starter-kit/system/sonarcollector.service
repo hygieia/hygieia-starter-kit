@@ -1,0 +1,13 @@
+[Unit]
+Description=SonarCollectorService
+
+[Service]
+ExecStart=/usr/bin/java -Dlogging.config=file:/hygieia/collectors/logback_sonar.xml -jar /hygieia/collectors/sonar-codequality-collector.jar  --spring.config.name=sonar --spring.config.location=/hygieia/collectors/sonar.properties
+Restart=always
+User=root
+Group=root
+respawn=true
+WorkingDirectory=/hygieia/collectors
+
+[Install]
+WantedBy=multi-user.target
