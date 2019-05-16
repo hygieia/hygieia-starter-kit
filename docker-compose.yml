@@ -2,7 +2,7 @@
 version: '3'
 services:
   hygieia-starter:
-    image: hygieia-starter-kit
+    image: hygieiadoc/hygieia-starter-kit
     ports:
       - "80:80"
     environment: 

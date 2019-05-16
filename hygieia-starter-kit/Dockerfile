@@ -1,4 +1,4 @@
-FROM hygieia-starter-base:latest
+FROM hygieiadoc/hygieia-starter-base:latest
 
 EXPOSE 8080
 EXPOSE 80
