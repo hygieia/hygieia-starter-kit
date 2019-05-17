@@ -9,7 +9,13 @@ services:
       - GITHUB_HOST=
       - GITHUB_CRON=0/60 * * * * *
       - JENKINS_CRON=0/60 * * * * *
-      - JENKINS_SERVER_0=
+      - JENKINS_SERVER= #https://<username>:<password>@jenkinsInstanceUrl.com/
+      - SONAR_CRON=0/60 * * * * *
+      - SONAR_HOST= 
+      - SONAR_VERSION=6.7
+      - SONAR_METRICS=ncloc,violations,new_vulnerabilities,critical_violations,major_violations,blocker_violations,tests,test_success_density,test_errors,test_failures,coverage,line_coverage,sqale_index,alert_status,quality_gate_details
+      - SONAR_USERNAME=
+      - SONAR_PASSWORD=
     privileged: true
 #    volumes:
 #      - '<path_to_local_storage>:/var/lib/mongo'

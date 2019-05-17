@@ -41,21 +41,38 @@ auth.expirationTime=25000000
 github.cron=${GITHUB_CRON:-}
 
 github.host=${GITHUB_HOST:-}
-github.proxy=
-github.proxyPort=
-github.proxyUser=
-github.proxyPassword=
 github.firstRunHistoryDays=60
-github.errorThreshold=50
+github.errorThreshold=100
 github.rateLimitThreshold=100
-github.readTimeout=60000
-github.connectTimeout=30000
+
+github.notBuiltCommits[0]=(.)*(\\[maven-release-plugin\\])(.)*
+
+github.commitPullSyncTime=604800000
+
+github.offsetMinutes=120
+
+github.fetchCount=100
 
 #Randomly generated key	
 github.key=DfvBg+AOGol5fOofjMdPYtpYGQ1rH4km
 
 # Sonar Properties #
+sonar.cron=${SONAR_CRON:-}
 
+# Sonar server(s) (required) - Can provide multiple
+sonar.servers[0]=${SONAR_HOST:-}
+
+# Sonar version, match array index to the server. If not set, will default to version prior to 6.3.
+sonar.versions[0]=${SONAR_VERSION:-}
+
+# Sonar Metrics - Required. 
+#Sonar versions lesser than 6.3
+sonar.metrics[0]=${SONAR_METRICS:-}
+
+sonar.niceNames[0]=demoSonar
+# Sonar login credentials
+sonar.username=${SONAR_USERNAME:-}
+sonar.password=${SONAR_PASSWORD:-}
 
 # Jenkins Properties #
 
@@ -63,12 +80,14 @@ jenkins.cron=${JENKINS_CRON:-}
 
 jenkins.folderDepth:20
  #Jenkins server (required) - Can provide multiple
-jenkins.servers[0]=${JENKINS_SERVER_0:-}
+jenkins.servers[0]=${JENKINS_SERVER:-}
 jenkins.saveLog=false
-jenkins.niceNames[0]=
-jenkins.environments[0]=
+jenkins.niceNames[0]=demoJenkins
+jenkins.environments[0]=DEV
 # The page size
 jenkins.pageSize=1000
+jenkins.connectTimeout=50000
+jenkins.readTimeout=50000
 
 EOF
 

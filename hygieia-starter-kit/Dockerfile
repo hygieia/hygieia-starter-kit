@@ -22,17 +22,23 @@ RUN curl -o /hygieia/api/api.jar https://oss.sonatype.org/content/repositories/s
 
 RUN curl -o /hygieia/ui/ui.tar.gz https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/UI/3.0.2-SNAPSHOT/UI-3.0.2-20190513.114834-35-src.tar.gz
 
+#RUN curl -o /hygieia/collectors/github-scm-collector.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/github-graphql-scm-collector/3.0.2-SNAPSHOT/github-graphql-scm-collector-3.0.2-20190515.204244-40.jar
+
+RUN curl -o /hygieia/collectors/sonar-codequality-collector.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/sonar-codequality-collector/3.0.2-SNAPSHOT/sonar-codequality-collector-3.0.2-20190517.150717-42.jar
+
+#RUN curl -o /hygieia/collectors/jenkins-build-collector.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/jenkins-build-collector/3.0.2-SNAPSHOT/jenkins-build-collector-3.0.2-20190517.150634-42.jar
+
+
 WORKDIR /hygieia/ui
 RUN tar -zvxf ui.tar.gz
 RUN mv UI-3.0.2-SNAPSHOT/dist/* /var/www/html/
 
 # Start Mongo #
-RUN systemctl enable mongod
-
-# Enable API #
-RUN systemctl enable hygieiaapp.service
-
-#RUN systemctl enable jenkinscollector.service
+RUN systemctl enable mongod; \
+	systemctl enable hygieiaapp.service; \
+	systemctl enable sonarcollector.service; \
+	systemctl enable jenkinscollector.service; \
+	systemctl enable githubcollector.service
 
 # run httpd #
 RUN systemctl enable httpd.service
