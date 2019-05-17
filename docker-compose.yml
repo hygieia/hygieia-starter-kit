@@ -1,4 +1,3 @@
-
 version: '3'
 services:
   hygieia-starter:
@@ -17,6 +16,8 @@ services:
       - SONAR_USERNAME=
       - SONAR_PASSWORD=
     privileged: true
+# If you want to keep the mongo data uncomment out the following and
+# replace <path_to_local_storage> with where you want the data to be stored on your machine
 #    volumes:
 #      - '<path_to_local_storage>:/var/lib/mongo'
 
