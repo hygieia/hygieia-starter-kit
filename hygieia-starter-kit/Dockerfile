@@ -6,42 +6,28 @@ EXPOSE 80
 ENV JAVA_HOME /usr/lib/jvm/java-openjdk
 ENV PROP_FILE /hygieia/application.properties
 
-RUN mkdir -p /hygieia/api/logs; \
-mkdir -p /hygieia/ui/; \
-mkdir -p /hygieia/collectors/logs; \
-mkdir -p /usr/src/app
-
 
 COPY /api/* /hygieia/api/
 COPY /system/* /etc/systemd/system/
 COPY /collectors/* /hygieia/collectors/
 COPY /ui/httpd.conf /etc/httpd/conf/
+ADD /certs/* /hygieia/cacerts/
 ADD /properties-builder.sh /hygieia/
 
-RUN curl -o /hygieia/api/api.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/api/3.0.2-SNAPSHOT/api-3.0.2-20190513.114318-46.jar 
+# For adding certs
+RUN ls -1 /hygieia/cacerts | while read cert; do \
+        openssl x509 -outform der -in /hygieia/cacerts/$cert -out $cert.der; \
+        $JAVA_HOME/bin/keytool -import -alias $cert -keystore $JAVA_HOME/jre/lib/security/cacerts -trustcacerts -file $cert.der -storepass changeit -noprompt; \
+        rm $cert.der; \
+    done
 
-RUN curl -o /hygieia/ui/ui.tar.gz https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/UI/3.0.2-SNAPSHOT/UI-3.0.2-20190513.114834-35-src.tar.gz
-
-#RUN curl -o /hygieia/collectors/github-scm-collector.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/github-graphql-scm-collector/3.0.2-SNAPSHOT/github-graphql-scm-collector-3.0.2-20190515.204244-40.jar
-
-RUN curl -o /hygieia/collectors/sonar-codequality-collector.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/sonar-codequality-collector/3.0.2-SNAPSHOT/sonar-codequality-collector-3.0.2-20190517.150717-42.jar
-
-#RUN curl -o /hygieia/collectors/jenkins-build-collector.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/jenkins-build-collector/3.0.2-SNAPSHOT/jenkins-build-collector-3.0.2-20190517.150634-42.jar
-
-
-WORKDIR /hygieia/ui
-RUN tar -zvxf ui.tar.gz
-RUN mv UI-3.0.2-SNAPSHOT/dist/* /var/www/html/
-
-# Start Mongo #
 RUN systemctl enable mongod; \
 	systemctl enable hygieiaapp.service; \
 	systemctl enable sonarcollector.service; \
-	systemctl enable jenkinscollector.service; \
-	systemctl enable githubcollector.service
+#	systemctl enable jenkinscollector.service; \
+#	systemctl enable githubcollector.service; \
+	systemctl enable httpd.service
 
-# run httpd #
-RUN systemctl enable httpd.service
 WORKDIR /hygieia/
 RUN chmod 777 properties-builder.sh 
 

@@ -1,18 +1,5 @@
 #!/bin/bash
 
-# if [ "$SKIP_PROPERTIES_BUILDER" = true ]; then
-#   echo "Skipping properties builder"
-#   exit 0
-# fi
-
-# if we are linked, use that info
-# if [ "$MONGO_STARTED" != "" ]; then
-#   # links now use hostnames
-#   # todo: retrieve linked information such as hostname and port exposition
-#   export SPRING_DATA_MONGODB_HOST=mongodb
-#   export SPRING_DATA_MONGODB_PORT=27017
-# fi
-
 cat > $PROP_FILE <<EOF
 #Database Name - default is test
 dbname=dashboarddb
@@ -44,7 +31,7 @@ github.host=${GITHUB_HOST:-}
 github.firstRunHistoryDays=60
 github.errorThreshold=100
 github.rateLimitThreshold=100
-
+github.personalAccessToken=${GITHUB_PERSONAL_ACCESS_TOKEN:-}
 github.notBuiltCommits[0]=(.)*(\\[maven-release-plugin\\])(.)*
 
 github.commitPullSyncTime=604800000
@@ -55,6 +42,12 @@ github.fetchCount=100
 
 #Randomly generated key	
 github.key=DfvBg+AOGol5fOofjMdPYtpYGQ1rH4km
+
+github.proxy=${PROXY_URL:-}
+github.proxyPort=${PROXY_PORT:-}
+github.proxyUser=${PROXY_USERNAME:-}
+github.proxyPassword=${PROXY_PASSWORD:-}
+
 
 # Sonar Properties #
 sonar.cron=${SONAR_CRON:-}
