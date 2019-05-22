@@ -30,15 +30,23 @@ yum -y install httpd; \
 yum -y install java-1.8.0-openjdk-devel; \
 yum clean all; 
 
+# Pulls API jar
 RUN curl -o /hygieia/api/api.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/api/3.0.2-SNAPSHOT/api-3.0.2-20190520.142918-54.jar
 
+# Pulls UI tar
 RUN curl -o /hygieia/ui/ui.tar.gz https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/UI/3.0.2-SNAPSHOT/UI-3.0.2-20190520.143836-42-src.tar.gz
 
+# Pulls Github Collector jar
 RUN curl -o /hygieia/collectors/github-scm-collector.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/github-scm-collector/3.0.2-SNAPSHOT/github-scm-collector-3.0.2-20190520.143623-42.jar	
 
+# Pulls Sonar Collector jar
 RUN curl -o /hygieia/collectors/sonar-codequality-collector.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/sonar-codequality-collector/3.0.2-SNAPSHOT/sonar-codequality-collector-3.0.2-20190520.143310-43.jar
 
+# Pulls Jenkins Collector jar
 RUN curl -o /hygieia/collectors/jenkins-build-collector.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/jenkins-build-collector/3.0.2-SNAPSHOT/jenkins-build-collector-3.0.2-20190520.143135-43.jar
+
+# Bind to 0.0.0.0 to allow for external connection 
+RUN sed -i "s|bindIp: 127.0.0.1|bindIp: 0.0.0.0|g" /etc/mongod.conf
 
 WORKDIR /hygieia/ui
 RUN tar -zvxf ui.tar.gz
