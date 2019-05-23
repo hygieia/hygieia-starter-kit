@@ -37,7 +37,7 @@ RUN curl -o /hygieia/api/api.jar https://oss.sonatype.org/content/repositories/s
 RUN curl -o /hygieia/ui/ui.tar.gz https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/UI/3.0.2-SNAPSHOT/UI-3.0.2-20190520.143836-42-src.tar.gz
 
 # Pulls Github Collector jar
-RUN curl -o /hygieia/collectors/github-scm-collector.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/github-scm-collector/3.0.2-SNAPSHOT/github-scm-collector-3.0.2-20190520.143623-42.jar	
+RUN curl -o /hygieia/collectors/github-scm-collector.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/github-graphql-scm-collector/3.0.2-SNAPSHOT/github-graphql-scm-collector-3.0.2-20190523.134436-44.jar
 
 # Pulls Sonar Collector jar
 RUN curl -o /hygieia/collectors/sonar-codequality-collector.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/sonar-codequality-collector/3.0.2-SNAPSHOT/sonar-codequality-collector-3.0.2-20190520.143310-43.jar

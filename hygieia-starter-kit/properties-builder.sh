@@ -45,6 +45,8 @@ github.host=${GITHUB_HOST:-}
 github.firstRunHistoryDays=60
 github.errorThreshold=100
 github.rateLimitThreshold=100
+github.readTimeout=60000
+github.connectTimeout=30000
 github.personalAccessToken=${GITHUB_PERSONAL_ACCESS_TOKEN:-}
 github.notBuiltCommits[0]=(.)*(\\[maven-release-plugin\\])(.)*
 
@@ -57,7 +59,7 @@ github.fetchCount=100
 #Randomly generated key	
 github.key=DfvBg+AOGol5fOofjMdPYtpYGQ1rH4km
 
-github.proxy=${PROXY_URL:-}
+github.proxyUrl=${PROXY_URL:-}
 github.proxyPort=${PROXY_PORT:-}
 github.proxyUser=${PROXY_USERNAME:-}
 github.proxyPassword=${PROXY_PASSWORD:-}
