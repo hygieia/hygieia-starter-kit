@@ -19,4 +19,29 @@ Hygieia Starter Kit.
 This Kit is a single image that contains the UI, API, Mongo, Github Collector, Sonar Collector, and Jenkins Collector.
 
 ### Setup Instructions
+To configure the Starter Kit, execute the following steps:
+
+**Step 1: Download or Clone the Starter Kit**
+
+**Step 2: Add additional Certificates**
+If you are unsure or do not need to do this continue to Step 3
+    * add .crt files to hygieia-starter-kit/hygieia-starter-kit/certs
+    * Config docker-compose.yml
+    ```
+    * Run docker-compose up -d --build
+    ```
+
+**Step 3: Pull Down the Starter Kit Container**
+To pull down the start kit container run the following command:
+```
+docker-compose pull hygieia
+```
+
+**Step 3: Configure Collector Properties**
+
+
+**Step 4: Start the Container**
+```
+ docker-compose up -d
+```
 
