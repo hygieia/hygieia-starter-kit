@@ -19,29 +19,59 @@ Hygieia Starter Kit.
 This Kit is a single image that contains the UI, API, Mongo, Github Collector, Sonar Collector, and Jenkins Collector.
 
 ### Setup Instructions
+
 To configure the Starter Kit, execute the following steps:
 
-**Step 1: Download or Clone the Starter Kit**
+*   **Step 1: Download or Clone the Starter Kit**
 
-**Step 2: Add additional Certificates**
-If you are unsure or do not need to do this continue to Step 3
-    * add .crt files to hygieia-starter-kit/hygieia-starter-kit/certs
-    * Config docker-compose.yml
-    ```
-    * Run docker-compose up -d --build
-    ```
 
-**Step 3: Pull Down the Starter Kit Container**
+*   **Step 2: Pull Down the Starter Kit Container**
+
 To pull down the start kit container run the following command:
 ```
 docker-compose pull hygieia
 ```
 
-**Step 3: Configure Collector Properties**
+*   **Step 3: Add additional Certificates**
 
+If you are unsure or do not need to do this continue to Step 4. Add .crt files to `hygieia-starter-kit/hygieia-starter-kit/certs`
 
-**Step 4: Start the Container**
+*   **Step 4: Configure Collector Properties**
+Update docker-compose.yml to provide the below fields
 ```
- docker-compose up -d
+    environment: 
+      - PROXY_URL=
+      - PROXY_PORT=
+      - PROXY_USERNAME=
+      - PROXY_PASSWORD=
+      - GITHUB_HOST=github.com
+      - GITHUB_CRON=0/60 * * * * *
+      #See https://hygieia.github.io/Hygieia/troubleshoot.html for how to get a personal access token
+      - GITHUB_PERSONAL_ACCESS_TOKEN=
+      - JENKINS_CRON=0/60 * * * * *
+      - JENKINS_SERVER= #https://<username>:<password>@jenkinsInstanceUrl.com/
+      - SONAR_CRON=0/60 * * * * *
+      - SONAR_HOST=
+      - SONAR_VERSION=6.7
+      - SONAR_METRICS=ncloc,violations,new_vulnerabilities,critical_violations,major_violations,blocker_violations,tests,test_success_density,test_errors,test_failures,coverage,line_coverage,sqale_index,alert_status,quality_gate_details
+      - SONAR_USERNAME=
+      - SONAR_PASSWORD=
+
 ```
 
+*   **Step 5: Start/Stop the Container**
+    
+To start:
+```
+ docker-compose up -d 
+```
+Or if you added certs then
+```
+docker-compose up -d --build
+```
+
+To stop: 
+NOTE: Stopping the container will delete all saved data. See `docker-compose.yml` for how to persist data.
+```
+docker-compose down
+```
