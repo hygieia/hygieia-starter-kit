@@ -28,6 +28,7 @@ services:
       - PROXY_PASSWORD=
       - GITHUB_HOST=github.com
       - GITHUB_CRON=0/60 * * * * *
+       #See https://hygieia.github.io/Hygieia/troubleshoot.html for how to get a personal access token
       - GITHUB_PERSONAL_ACCESS_TOKEN=
       - JENKINS_CRON=0/60 * * * * *
       - JENKINS_SERVER= #https://<username>:<password>@jenkinsInstanceUrl.com/
