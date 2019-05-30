@@ -28,7 +28,6 @@ services:
       - PROXY_PASSWORD=
       - GITHUB_HOST=github.com
       - GITHUB_CRON=0/60 * * * * *
-      #See https://hygieia.github.io/Hygieia/troubleshoot.html for how to get a personal access token
       - GITHUB_PERSONAL_ACCESS_TOKEN=
       - JENKINS_CRON=0/60 * * * * *
       - JENKINS_SERVER= #https://<username>:<password>@jenkinsInstanceUrl.com/
@@ -39,8 +38,11 @@ services:
       - SONAR_USERNAME=
       - SONAR_PASSWORD=
     privileged: true
-# If you want to keep the mongo data uncomment out the following
+# If you want to view logs locally or have mongo data persisted uncomment out the below. 
 #    volumes:
+# This is for getting container logs locally
+#      - './logs:/hygieia/logs'
+# This is for persisting data after the container has stopped
 #      - './db/data:/var/lib/mongo'
 
 

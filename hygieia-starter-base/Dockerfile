@@ -19,10 +19,10 @@ ENV container docker
 
 COPY mongodb-org.repo /etc/yum.repos.d/
 
-RUN mkdir -p /hygieia/api/logs; \
+RUN mkdir -p /hygieia/logs; \
 mkdir -p /hygieia/ui/; \
-mkdir -p /hygieia/collectors/logs; \
-mkdir -p /usr/src/app; \
+mkdir -p /hygieia/api/; \
+mkdir -p /hygieia/collectors/; \
 mkdir -p /hygieia/cacerts
 
 RUN  yum -y install mongodb-org; \
@@ -31,19 +31,19 @@ yum -y install java-1.8.0-openjdk-devel; \
 yum clean all; 
 
 # Pulls API jar
-RUN curl -o /hygieia/api/api.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/api/3.0.2-SNAPSHOT/api-3.0.2-20190520.142918-54.jar
+RUN curl -o /hygieia/api/api.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/api/3.0.2-SNAPSHOT/api-3.0.2-20190528.210119-61.jar
 
 # Pulls UI tar
-RUN curl -o /hygieia/ui/ui.tar.gz https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/UI/3.0.2-SNAPSHOT/UI-3.0.2-20190520.143836-42-src.tar.gz
+RUN curl -o /hygieia/ui/ui.tar.gz https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/UI/3.0.2-SNAPSHOT/UI-3.0.2-20190528.210907-49-src.tar.gz
 
 # Pulls Github Collector jar
-RUN curl -o /hygieia/collectors/github-scm-collector.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/github-graphql-scm-collector/3.0.2-SNAPSHOT/github-graphql-scm-collector-3.0.2-20190523.134436-44.jar
+RUN curl -o /hygieia/collectors/github-scm-collector.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/github-graphql-scm-collector/3.0.2-SNAPSHOT/github-graphql-scm-collector-3.0.2-20190528.210719-49.jar
 
 # Pulls Sonar Collector jar
-RUN curl -o /hygieia/collectors/sonar-codequality-collector.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/sonar-codequality-collector/3.0.2-SNAPSHOT/sonar-codequality-collector-3.0.2-20190520.143310-43.jar
+RUN curl -o /hygieia/collectors/sonar-codequality-collector.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/sonar-codequality-collector/3.0.2-SNAPSHOT/sonar-codequality-collector-3.0.2-20190528.210407-50.jar
 
 # Pulls Jenkins Collector jar
-RUN curl -o /hygieia/collectors/jenkins-build-collector.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/jenkins-build-collector/3.0.2-SNAPSHOT/jenkins-build-collector-3.0.2-20190520.143135-43.jar
+RUN curl -o /hygieia/collectors/jenkins-build-collector.jar https://oss.sonatype.org/content/repositories/snapshots/com/capitalone/dashboard/jenkins-build-collector/3.0.2-SNAPSHOT/jenkins-build-collector-3.0.2-20190528.210317-50.jar
 
 # Bind to 0.0.0.0 to allow for external connection 
 RUN sed -i "s|bindIp: 127.0.0.1|bindIp: 0.0.0.0|g" /etc/mongod.conf
