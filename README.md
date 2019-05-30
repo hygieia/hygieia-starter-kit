@@ -1,3 +1,4 @@
+
 <!---
     Licensed to the Apache Software Foundation (ASF) under one or more
     contributor license agreements.  See the NOTICE file distributed with
@@ -16,28 +17,41 @@
 -->
 Hygieia Starter Kit.
 ===============================
-This Kit is a single image that contains the UI, API, Mongo, Github Collector, Sonar Collector, and Jenkins Collector.
+This Kit is a single image that contains the UI, API, Mongo, Github Collector, Sonar Collector, and Jenkins Collector. All of this can be configured with just a few commands. Note: This setup will take place of the manual steps for setup currently listed in the Hygieia documentation.
 
+### Prerequisites
+The following are the prerequisites for setup:
+Download and install Docker
 ### Setup Instructions
 
 To configure the Starter Kit, execute the following steps:
 
 *   **Step 1: Download or Clone the Starter Kit**
+If you do not already have the Hygieia starter kit installed, you can download or clone it from the GitHub repo.
 
 
 *   **Step 2: Pull Down the Starter Kit Container**
+Navigate to the directory where you downloaded/cloned the repo from the previous step.
+Ex. for Windows:
+```
+cd C:\Users\[usernname]\hygieia-starter-kit
+```
 
-To pull down the start kit container run the following command:
+ To pull down the start kit container run the following command:
 ```
 docker-compose pull hygieia
 ```
 
-*   **Step 3: Add additional Certificates**
+*   **Step 3: Add additional Certificates** (OPTIONAL)
 
-If you are unsure or do not need to do this continue to Step 4. Add .crt files to `hygieia-starter-kit/hygieia-starter-kit/certs`
+If you do not need this step or are unsure, skip and continue to Step 4. 
+
+Add .crt files to `hygieia-starter-kit/hygieia-starter-kit/certs`
 
 *   **Step 4: Configure Collector Properties**
 Update docker-compose.yml to provide the below fields
+
+Note: You only need to edit the values for collectors that you wish to configure/use. If you are not currently using them you may leave them blank or add these values later.
 ```
     environment: 
       - PROXY_URL=
@@ -62,16 +76,19 @@ Update docker-compose.yml to provide the below fields
 *   **Step 5: Start/Stop the Container**
     
 To start:
-```
- docker-compose up -d 
-```
-Or if you added certs then
+
+If you added certs in Step 3, then run
 ```
 docker-compose up -d --build
 ```
-
+Otherwise, run 
+```
+ docker-compose up -d 
+```
 To stop: 
-NOTE: Stopping the container will delete all saved data. See `docker-compose.yml` for how to persist data.
+NOTE: Stopping the container will delete all saved data. See `docker-compose.yml` for instructions on how to persist data.
 ```
 docker-compose down
 ```
+
+NOTE: All of the collectors, database, API and UI need to be running before you can test the app fully through the UI. If something is not working, check the logs to see if all of the different components are finished being built. After waiting for them to finish, everything should be running properly. 
