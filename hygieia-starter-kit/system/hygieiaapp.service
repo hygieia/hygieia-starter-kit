@@ -1,0 +1,13 @@
+[Unit]
+Description=HygieiaAPIJavaDaemon
+
+[Service]
+ExecStart=/usr/bin/java -Dserver.port=8080 -Dlogging.config=file:/hygieia/api/logback_api.xml -jar /hygieia/api/api.jar --spring.config.name=api --spring.config.location=/hygieia/application.properties
+Restart=always
+User=root
+Group=root
+respawn=true
+WorkingDirectory=/hygieia/api
+
+[Install]
+WantedBy=multi-user.target

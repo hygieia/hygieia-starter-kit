@@ -1,0 +1,13 @@
+[Unit]
+Description=JenkinsCollectorService
+
+[Service]
+ExecStart=/usr/bin/java -Djavax.net.ssl.trustStore=/usr/lib/jvm/java-openjdk/jre/lib/security/cacerts -Dlogging.config=file:/hygieia/collectors/logback_jenkins.xml -jar /hygieia/collectors/jenkins-build-collector.jar --spring.config.name=jenkins --spring.config.location=/hygieia/application.properties
+Restart=always
+User=root
+Group=root
+respawn=true
+WorkingDirectory=/hygieia/collectors
+
+[Install]
+WantedBy=multi-user.target
