@@ -50,6 +50,6 @@ RUN sed -i "s|bindIp: 127.0.0.1|bindIp: 0.0.0.0|g" /etc/mongod.conf
 
 WORKDIR /hygieia/ui
 RUN tar -zvxf ui.tar.gz
-RUN mv UI-3.0.2-SNAPSHOT/dist/* /var/www/html/
+RUN mv UI-3.0.2/dist/* /var/www/html/
 
 CMD ["/usr/sbin/init"]
