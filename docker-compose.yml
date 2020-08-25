@@ -33,6 +33,12 @@ services:
     volumes:
       - ./data/jenkins:/var/jenkins_home
       - ./logs/jenkins:/var/jenkins_home/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/json?tree=jobs[name]"]
+      interval: 5m
+      timeout: 30s
+      retries: 3
+      start_period: 5m
   hygieia:
     image: hygieiadoc/hygieia-starter-kit:latest
     build: ./hygieia-starter-kit
@@ -48,12 +54,12 @@ services:
       - PROXY_PORT=
       - PROXY_USERNAME=
       - PROXY_PASSWORD=
-      - GITHUB_HOST=github.com
-      - GITHUB_CRON=0/60 * * * * *
+#      - GITHUB_HOST=github.com
+      - GITHUB_CRON=0/5 * * * * *
        #See https://hygieia.github.io/Hygieia/troubleshoot.html for how to get a personal access token
       - GITHUB_PERSONAL_ACCESS_TOKEN=4b79c0cab07aa439072c1294b9f3f118e050a19b
       - JENKINS_CRON=0/5 * * * * *
-      - JENKINS_SERVER= http://jenkins:8080/
+      - JENKINS_SERVER= http://jenkins:8888/
       - SONAR_CRON=0/5 * * * * *
       - SONAR_HOST=http://sonarqube:9000/
       - SONAR_VERSION=8.4
