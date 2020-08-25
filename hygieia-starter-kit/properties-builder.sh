@@ -42,6 +42,8 @@ auth.expirationTime=25000000
 github.cron=${GITHUB_CRON:-}
 
 github.host=${GITHUB_HOST:-}
+github.graphqlUrl=${GITHUB_GRAPHQL_URL:-}
+github.baseApiUrl=${GITHUB_BASE_API_URL:-}
 github.firstRunHistoryDays=60
 github.errorThreshold=100
 github.rateLimitThreshold=100
@@ -63,7 +65,6 @@ github.proxyUrl=${PROXY_URL:-}
 github.proxyPort=${PROXY_PORT:-}
 github.proxyUser=${PROXY_USERNAME:-}
 github.proxyPassword=${PROXY_PASSWORD:-}
-
 
 # Sonar Properties #
 sonar.cron=${SONAR_CRON:-}

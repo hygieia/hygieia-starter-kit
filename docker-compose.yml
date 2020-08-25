@@ -31,6 +31,8 @@ services:
     image: mongo:3.6
     ports:
       - "27017:27017"
+    volumes:
+      - ./data/mongodb:/data/db
   jenkins:
     build: ./jenkins
     ports:
@@ -40,9 +42,9 @@ services:
       - ./data/jenkins:/var/jenkins_home
       - ./logs/jenkins:/var/jenkins_home/logs
     healthcheck:
-      test: wget -qO- http://localhost:8080/api/json | grep -q '"status":"UP"'
-      interval: 5m
-      timeout: 30s
+      test: wget -qO- http://localhost:8080/api/json?tree=mode | grep -q '"NORMAL"'
+      interval: 1m
+      timeout: 10s
       retries: 3
       start_period: 5m
   hygieia:
@@ -61,12 +63,14 @@ services:
       - PROXY_USERNAME=
       - PROXY_PASSWORD=
 #      - GITHUB_HOST=github.com
-      - GITHUB_CRON=0/5 * * * * *
+#      - GITHUB_GRAPHQL_URL=
+#      - GITHUB_BASE_API_URL=
+      - GITHUB_CRON=0 1/5 * * * *
        #See https://hygieia.github.io/Hygieia/troubleshoot.html for how to get a personal access token
       - GITHUB_PERSONAL_ACCESS_TOKEN=4b79c0cab07aa439072c1294b9f3f118e050a19b
-      - JENKINS_CRON=0/5 * * * * *
-      - JENKINS_SERVER= http://jenkins:8888/
-      - SONAR_CRON=0/5 * * * * *
+      - JENKINS_CRON=0 2/5 * * * *
+      - JENKINS_SERVER= http://jenkins:8080/
+      - SONAR_CRON=0 3/5 * * * *
       - SONAR_HOST=http://sonarqube:9000/
       - SONAR_VERSION=8.4
       - SONAR_METRICS=ncloc,violations,new_vulnerabilities,critical_violations,major_violations,blocker_violations,tests,test_success_density,test_errors,test_failures,coverage,line_coverage,sqale_index,alert_status,quality_gate_details
