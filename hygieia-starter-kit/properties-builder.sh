@@ -19,7 +19,7 @@ cat > $PROP_FILE <<EOF
 dbname=dashboarddb
 
 #Database HostName - default is localhost
-dbhost=localhost
+dbhost=mongodb
 
 #Database Port - default is 27017
 dbport=27017
