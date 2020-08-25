@@ -21,6 +21,12 @@ services:
     volumes:
       - ./data/sonarqube:/opt/sonarqube/data
       - ./logs/sonarqube:/opt/sonarqube/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/api/system/status"]
+      interval: 5m
+      timeout: 30s
+      retries: 3
+      start_period: 5m
   mongodb:
     image: mongo:3.6
     ports:
