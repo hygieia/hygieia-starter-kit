@@ -1,0 +1,9 @@
+gradle:1.36
+github-branch-source:2.8.3
+jdk-tool:1.4
+workflow-aggregator:2.6
+timestamper:1.11.5
+ws-cleanup:0.38
+bouncycastle-api:2.18
+command-launcher:1.4
+sonar:2.11

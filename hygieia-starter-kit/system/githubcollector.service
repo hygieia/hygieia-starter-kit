@@ -2,7 +2,7 @@
 Description=GithubCollectorService
 
 [Service]
-ExecStart=/usr/bin/java -Djavax.net.ssl.trustStore=/usr/lib/jvm/java-openjdk/jre/lib/security/cacerts -Dlogging.config=file:/hygieia/collectors/logback_github.xml -jar /hygieia/collectors/github-scm-collector.jar --spring.config.name=github --spring.config.location=/hygieia/application.properties
+ExecStart=/usr/bin/java -Dserver.port=8081 -Djavax.net.ssl.trustStore=/usr/lib/jvm/java-openjdk/jre/lib/security/cacerts -Dlogging.config=file:/hygieia/collectors/logback_github.xml -jar /hygieia/collectors/github-graphql-scm-collector.jar --spring.config.name=github --spring.config.location=/hygieia/application.properties
 Restart=always
 User=root
 Group=root
