@@ -71,7 +71,7 @@ services:
       - JENKINS_CRON=0 2/5 * * * *
       - JENKINS_SERVER= http://jenkins:8080/
       - SONAR_CRON=0 3/5 * * * *
-      - SONAR_HOST=http://sonarqube:9000/
+      - SONAR_HOST=http://sonarqube:9000
       - SONAR_VERSION=8.4
       - SONAR_METRICS=ncloc,violations,new_vulnerabilities,critical_violations,major_violations,blocker_violations,tests,test_success_density,test_errors,test_failures,coverage,line_coverage,sqale_index,alert_status,quality_gate_details
       - SONAR_USERNAME=
