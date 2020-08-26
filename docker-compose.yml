@@ -67,7 +67,7 @@ services:
 #      - GITHUB_BASE_API_URL=
       - GITHUB_CRON=0 1/5 * * * *
        #See https://hygieia.github.io/Hygieia/troubleshoot.html for how to get a personal access token
-      - GITHUB_PERSONAL_ACCESS_TOKEN=4b79c0cab07aa439072c1294b9f3f118e050a19b
+      - GITHUB_PERSONAL_ACCESS_TOKEN=
       - JENKINS_CRON=0 2/5 * * * *
       - JENKINS_SERVER= http://jenkins:8080/
       - SONAR_CRON=0 3/5 * * * *
