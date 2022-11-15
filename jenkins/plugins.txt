@@ -4,6 +4,6 @@ jdk-tool:1.4
 workflow-aggregator:2.6
 timestamper:1.11.5
 ws-cleanup:0.38
-bouncycastle-api:2.18
+bouncycastle-api:2.26
 command-launcher:1.4
 sonar:2.11
